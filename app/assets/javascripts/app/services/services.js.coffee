@@ -8,9 +8,9 @@ FeedServices.factory 'Auth', ['$q', ($q) ->
       deferred = $q.defer()
       unless service.connected
         OAuth.popup(service.provider, { cache: true })
-          .done(-> service.connected = true; console.log "successcal"; deferred.resolve)
+          .done(-> service.connected = true; console.log "successcal"; deferred.resolve())
           .fail(-> service.connected = false; alert("Something went wrong while connecting with " + provider))
-      else deferred.resolve
+      else deferred.resolve()
       deferred.promise
   }
 ]

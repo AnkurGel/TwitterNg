@@ -3,8 +3,10 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
   Auth.init()
   Twitter.init()
 
+  $scope.isConnected = Twitter.connected
+
   $scope.login = ->
     Twitter.connect().then ->
-      console.log("Connection to Twitter is successful")
+      $scope.isConnected = true
 
   ]

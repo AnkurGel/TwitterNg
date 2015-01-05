@@ -6,9 +6,23 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-controller="TwitterFeed">
+<div class="container">
+  <div class="header">
+    <%= render partial: 'layouts/header' %>
 
-<%= yield %>
+    <%= render partial: 'layouts/login' %>
+
+    
+    <%= yield %>
+
+    <%= render partial: 'layouts/footer' %>
+
+  </div> <!-- /container -->
+
+</div>
+
+
 
 </body>
 </html>
