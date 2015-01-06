@@ -8,7 +8,7 @@ FeedServices.factory 'Auth', ['$q', ($q) ->
       deferred = $q.defer()
       unless service.connected
         OAuth.popup(service.provider, { cache: true })
-          .done(-> service.connected = true; console.log "successcal"; deferred.resolve())
+          .done(-> service.connected = true; deferred.resolve())
           .fail(-> service.connected = false; alert("Something went wrong while connecting with " + provider))
       else deferred.resolve()
       deferred.promise
@@ -16,16 +16,23 @@ FeedServices.factory 'Auth', ['$q', ($q) ->
 ]
 
 FeedServices.factory 'Twitter', ['$q', 'Auth', ($q, Auth) ->
+  twitterObject = false
   exports = {
     provider: 'twitter'
     connected: false
     init: ->
-      @connected = typeof OAuth.create('twitter') == 'object' ? true : false
+      twitterObject = OAuth.create('twitter')
+      @connected = typeof twitterObject == 'object' ? true : false
 
     connect: -> Auth.connect @
-    isReady: -> @connected
     logOut: ->
-      OAuth.clearCache('twitter'); @connected = false
+      OAuth.clearCache 'twitter'
+      @connected = false
+
+    getUserInfo: ->
+      twitterObject.me().done (data)-> console.log(data)
+
+
   }
   return exports
 ]
