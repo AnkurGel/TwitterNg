@@ -1,1 +1,1 @@
-Feed = angular.module('Feed', ['FeedControllers', 'FeedServices'])
+Feed = angular.module('Feed', ['FeedControllers', 'FeedServices', 'ngAnimate'])
