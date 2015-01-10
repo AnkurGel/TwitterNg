@@ -9,7 +9,7 @@ Tasks
 - [x] Join barebone skelton of Rails with Angular
 - [x] Make a uniform pluggable `Auth` service in Angular.
 - [x] Integrate _Twitter_ sub-service as provider for `Auth`
-- [ ] Design frontend pages for auth and timeline.
+- [x] Design frontend pages for auth and timeline.
 - [ ] Make service to make calls on Twitter API
 - [ ] Directive for representing tweet and components
 - [ ] Make service for auto-refreshing and manual refresh of user's timeline

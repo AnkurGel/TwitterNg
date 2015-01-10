@@ -78,3 +78,17 @@ body {
     opacity: 0;
   }
 }
+
+.row.userInfo {
+  margin: 40px 0;
+  min-height: 100px;
+
+  .thumbnail.profile_pic  {
+    width: 110px;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+

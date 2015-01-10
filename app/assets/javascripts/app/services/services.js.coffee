@@ -30,10 +30,18 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', ($q, Auth) ->
       @connected = false
 
     getUserInfo: ->
-      twitterObject.me().done (data)-> console.log(data)
-
+      deferred = $q.defer()
+      twitterObject.get('/1.1/account/verify_credentials.json')
+        .done (data) -> deferred.resolve data
+        .fail -> alert("Something went wrong while fetching your info. Please try again.")
+      deferred.promise
 
   }
   return exports
 ]
 
+FeedServices.factory 'Defer', ['$q', ($q) ->
+  (asyncAction) ->
+    deferred = $q.defer()
+    asyncAction()
+]
