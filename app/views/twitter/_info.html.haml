@@ -2,7 +2,7 @@
   .loading.show
     = image_tag 'ajax-loader.gif'
   .content.hide
-    .col-xs-6.col-md-2
+    .col-xs-6.col-md-2.profile_pic
       %span.thumbnail.profile_pic{ href: '#' }
         %img{ "ng-src" => "{{userInfo.profile_image_url | stripSrc}}" }
     .col-xs-6.col-md-10
@@ -13,7 +13,7 @@
       .row
         .col-xs-12.col-md-12
           %h4.text-left
-            %blockquote
+            %blockquote{ linkify: 'twitter' }
               {{ userInfo.description }}
       .row
         .col-xs-3.col-md-3
@@ -26,5 +26,5 @@
             %span.badge {{ userInfo.friends_count }}
         .col-xs-6.col-md-6
           %span.glyphicon.glyphicon-link
-          %a{ "ng-href" => "http://twitter.com/{{userInfo.screen_name}}" } http://twitter.com/{{userInfo.screen_name}}
+          %a{ "ng-href" => "{{prefixLink('')}}" } {{prefixLink('')}}
 

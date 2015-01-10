@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ./lib/angular-linkify.min
 //= require angular
 //= require angular-animate
 //= require angular-route
