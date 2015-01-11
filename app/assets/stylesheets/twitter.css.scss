@@ -101,7 +101,21 @@ body {
 
 .row.tweets {
   .content .row.tweet {
-    min-height: 110px;
+    min-height: 130px;
+    text-decoration: none;
+    .share span{
+      cursor: pointer;
+      color: gray;
+      &:hover {
+        color: rgb(161, 16, 16);
+        text-decoration: none;
+      }
+      .retweeted {
+        color: rgb(42, 56, 255);
+      }
+      .favorited {
 
+      }
+    }
   }
 }

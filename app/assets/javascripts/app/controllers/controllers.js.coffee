@@ -9,10 +9,9 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
   postSignIn = ->
     if $scope.isConnected
       $("#logout").slideDown 'slow'
-      applyLoading()
       Twitter.getUserInfo().then (data) ->
         $scope.userInfo = data;
-        $(".userInfo .loading").remove();
+        $(".userInfo .loading").remove()
         $(".content").removeClass('hide')
 
       Twitter.getTimeline().then (data) ->
@@ -22,14 +21,16 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
         $scope.newTweets.push.apply($scope.newTweets, data)
         console.log(data)
 
-  applyLoading =->
-    $(".userInfo")
-
   $scope.login = ->
     Twitter.connect().then ->
       $scope.isConnected = true
       Twitter.init()
       postSignIn()
+
+  $scope.retweet = (tweet) ->
+    Twitter.retweet(tweet).then ->
+      tweet.retweeted = true
+
 
   $scope.prefixLink = (suffix) ->
     ("http://twitter.com/" + $scope.userInfo.screen_name + "/" + suffix) if suffix? && $scope.userInfo?

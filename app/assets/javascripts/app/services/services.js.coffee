@@ -33,6 +33,13 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
 
     getTimeline : -> Defer(twitterObject, '/1.1/statuses/home_timeline.json')
 
+    retweet : (tweet) ->
+      deferred = $q.defer()
+      twitterObject.post("/1.1/statuses/retweet/" + tweet.id + ".json")
+        .done (data)-> deferred.resolve data
+        .fail -> alert("Something went wrong while attempting to retweet this")
+      deferred.promise
+
   }
   return exports
 ]

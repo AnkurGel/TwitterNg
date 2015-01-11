@@ -1,5 +1,5 @@
 %div.row.userInfo{ 'ng-show' => 'isConnected' }
-  .loading.show
+  .loading
     = image_tag 'ajax-loader.gif'
   .content.hide
     .col-xs-6.col-md-2.profile_pic
@@ -27,4 +27,3 @@
         .col-xs-6.col-md-6
           %span.glyphicon.glyphicon-link
           %a{ "ng-href" => "{{prefixLink('')}}" } {{prefixLink('')}}
-
