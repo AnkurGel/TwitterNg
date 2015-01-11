@@ -5,6 +5,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
 
   $scope.isConnected = Twitter.connected
 
+  $scope.newTweets = []
   postSignIn = ->
     if $scope.isConnected
       $("#logout").slideDown 'slow'
@@ -13,6 +14,12 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
         $scope.userInfo = data;
         $(".userInfo .loading").remove();
         $(".content").removeClass('hide')
+
+      Twitter.getTimeline().then (data) ->
+        $(".row.tweets")
+          .find('.loading').remove().end()
+          .find('.content').removeClass('hide')
+        $scope.newTweets.push.apply($scope.newTweets, data)
         console.log(data)
 
   applyLoading =->

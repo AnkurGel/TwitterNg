@@ -3,7 +3,7 @@
     = image_tag 'ajax-loader.gif'
   .content.hide
     .col-xs-6.col-md-2.profile_pic
-      %span.thumbnail.profile_pic{ href: '#' }
+      %span.thumbnail.profile_pic
         %img{ "ng-src" => "{{userInfo.profile_image_url | stripSrc}}" }
     .col-xs-6.col-md-10
       .row

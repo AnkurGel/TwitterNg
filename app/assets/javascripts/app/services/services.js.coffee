@@ -15,7 +15,7 @@ FeedServices.factory 'Auth', ['$q', ($q) ->
   }
 ]
 
-FeedServices.factory 'Twitter', ['$q', 'Auth', ($q, Auth) ->
+FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
   twitterObject = false
   exports = {
     provider: 'twitter'
@@ -29,19 +29,20 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', ($q, Auth) ->
       OAuth.clearCache 'twitter'
       @connected = false
 
-    getUserInfo: ->
-      deferred = $q.defer()
-      twitterObject.get('/1.1/account/verify_credentials.json')
-        .done (data) -> deferred.resolve data
-        .fail -> alert("Something went wrong while fetching your info. Please try again.")
-      deferred.promise
+    getUserInfo: -> Defer(twitterObject, '/1.1/account/verify_credentials.json')
+
+    getTimeline : -> Defer(twitterObject, '/1.1/statuses/home_timeline.json')
 
   }
   return exports
 ]
 
 FeedServices.factory 'Defer', ['$q', ($q) ->
-  (asyncAction) ->
+  (api, url) ->
     deferred = $q.defer()
-    asyncAction()
+    api.get(url)
+      .done (data) -> deferred.resolve data
+      .fail -> alert("Failed while requesting " + url)
+    deferred.promise
+
 ]

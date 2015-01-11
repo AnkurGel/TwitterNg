@@ -1,15 +1,18 @@
-.row.marketing{"ng-show" => 'isConnected'}
-  .col-lg-6
-    %h4 Subheading
-    %p Ankur Goel
-  .col-lg-6
-    %h4 Subheading
-    %p Ankur Goel
-
-  .col-lg-6
-    %h4 Something
-    %p Something more
-
-    %h4 Something
-    %h4 foo bar
+.row.marketing.tweets{"ng-show" => 'isConnected'}
+  .loading.show
+    = image_tag 'ajax-loader.gif'
+  .content.hide
+    .col-lg-6.col-md-6{ "ng-repeat" => "tweet in newTweets" }
+      .row.tweet
+        .row
+          .col-md-4
+            %h4{ linkify: 'twitter' } @{{ tweet.user.screen_name }}
+          .col-md-7
+            %h5.text-right {{ tweet.user.name }}
+        .col-md-2.col-lg-2
+          %span.thumbnail.avatar{ href: '#' }
+            %img{ "ng-src" => "{{tweet.user.profile_image_url}}" }
+        .col-md-10.col-md-10
+          -#%h4 {{ tweet.user.screen_name }}
+          %p{ linkify: 'twitter' } {{ tweet.text }}
 
