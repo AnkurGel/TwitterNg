@@ -10,8 +10,8 @@ Tasks
 - [x] Make a uniform pluggable `Auth` service in Angular.
 - [x] Integrate _Twitter_ sub-service as provider for `Auth`
 - [x] Design frontend pages for auth and timeline.
-- [ ] Make service to make calls on Twitter API
-- [ ] Directive for representing tweet and components
+- [x] Make service to make calls on Twitter API
+- [x] Directive for representing tweet and components
 - [ ] Make service for auto-refreshing and manual refresh of user's timeline
 - [ ] Integrate different twitter functionalities in application
 - [ ] _More..._
