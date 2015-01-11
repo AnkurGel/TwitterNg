@@ -103,6 +103,9 @@ body {
   .content .row.tweet {
     min-height: 130px;
     text-decoration: none;
+    &:hover {
+      background-color: rgb(251, 251, 251);
+    }
     .share span{
       cursor: pointer;
       color: gray;

@@ -7,8 +7,8 @@
         .row
           .col-md-4
             %h4{ linkify: 'twitter' } @{{ tweet.user.screen_name }}
-          .col-md-7
-            %h5.text-right {{ tweet.user.name }}
+          .col-md-3.col-md-offset-5
+            %h5.text-left {{ tweet.user.name }}
         .col-md-2.col-lg-2
           %span.thumbnail.avatar{ href: '#' }
             %img{ "ng-src" => "{{tweet.user.profile_image_url}}" }
