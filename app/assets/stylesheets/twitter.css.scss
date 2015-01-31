@@ -1,3 +1,7 @@
+.container {
+  width: 1350px;
+}
+
 body {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -79,6 +83,10 @@ body {
   }
 }
 
+.row {
+  margin-left: 0px;
+}
+
 .row.userInfo {
   margin: 40px 0;
   min-height: 100px;
@@ -93,6 +101,9 @@ body {
       width: 100px;
       height: 100px;
     }
+  }
+  .glyphicon {
+    cursor: pointer;
   }
   h3 {
     margin-top: 0px;

@@ -8,8 +8,8 @@ FeedServices.factory 'Auth', ['$q', ($q) ->
       deferred = $q.defer()
       unless service.connected
         OAuth.popup(service.provider, { cache: true })
-          .done(-> service.connected = true; deferred.resolve())
-          .fail(-> service.connected = false; alert("Something went wrong while connecting with " + provider))
+          .done -> service.connected = true; deferred.resolve()
+          .fail -> service.connected = false; alert("Something went wrong while connecting with " + provider)
       else deferred.resolve()
       deferred.promise
   }
@@ -31,22 +31,26 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
 
     getUserInfo: -> Defer(twitterObject, '/1.1/account/verify_credentials.json')
 
-    getTimeline : -> Defer(twitterObject, '/1.1/statuses/home_timeline.json')
+    getTimeline: -> Defer(twitterObject, '/1.1/statuses/home_timeline.json')
 
-    retweet : (tweet) ->
+    retweet: (tweet) ->
       deferred = $q.defer()
       twitterObject.post("/1.1/statuses/retweet/" + tweet.id + ".json")
         .done (data)-> deferred.resolve data
         .fail -> alert("Something went wrong while attempting to retweet this")
       deferred.promise
 
+    getUserTimeline: (userId) ->
+      Defer(twitterObject, '/1.1/statuses/user_timeline.json', {userId: userId})
+
   }
-  return exports
+  exports
 ]
 
 FeedServices.factory 'Defer', ['$q', ($q) ->
-  (api, url) ->
+  (api, url, params) ->
     deferred = $q.defer()
+    url = url + "?" + $.param(params) if params?
     api.get(url)
       .done (data) -> deferred.resolve data
       .fail -> alert("Failed while requesting " + url)

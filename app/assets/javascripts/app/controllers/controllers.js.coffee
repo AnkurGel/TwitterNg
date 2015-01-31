@@ -12,7 +12,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
       Twitter.getUserInfo().then (data) ->
         $scope.userInfo = data;
         $(".userInfo .loading").remove()
-        $(".content").removeClass('hide')
+        $(".content").removeClass 'hide'
 
       Twitter.getTimeline().then (data) ->
         $(".row.tweets")
@@ -40,7 +40,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
     Twitter.logOut()
     $scope.isConnected = false
 
-  postSignIn();
+  postSignIn()
   ]
 
 
