@@ -35,10 +35,14 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
 
     retweet: (tweet) ->
       deferred = $q.defer()
-      twitterObject.post("/1.1/statuses/retweet/" + tweet.id + ".json")
-        .done (data)-> deferred.resolve data
-        .fail -> alert("Something went wrong while attempting to retweet this")
-      deferred.promise
+      unless tweet.retweeted
+        twitterObject.post("/1.1/statuses/retweet/" + tweet.id_str + ".json")
+          .done (data)-> deferred.resolve data
+          .fail -> alert("Something went wrong while attempting to retweet this")
+        deferred.promise
+      else
+        # Process to undo a retweet is shady as fuck.
+        undoRetweet(tweet)
 
     favorite: (tweet) ->
       deferred = $q.defer()
@@ -52,6 +56,21 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
       Defer(twitterObject, '/1.1/statuses/user_timeline.json', {userId: userId})
 
   }
+  undoRetweet = (tweet) ->
+    deferred = $q.defer()
+    Defer(twitterObject, '/1.1/statuses/user_timeline.json?include_my_retweet=1')
+    .then (data) ->
+      result = data
+      .filter (t) -> t.retweeted
+      .filter (t) -> t.retweeted_status.id == tweet.id
+      if result.length > 0
+        twitterObject.post('/1.1/statuses/destroy/' + result[0].id_str + '.json')
+        .done (data) -> deferred.resolve data
+        .fail -> alert("Could not destroy the retweet")
+      else
+        alert("Could not find this tweet in your recent timeline")
+        deferred.resolve
+    deferred.promise
   exports
 ]
 

@@ -31,7 +31,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
 
   $scope.retweet = (tweet) ->
     Twitter.retweet(tweet).then ->
-      tweet.retweeted = true
+      tweet.retweeted = !tweet.retweeted
 
   $scope.favorite = (tweet) ->
     Twitter.favorite(tweet).then ->
