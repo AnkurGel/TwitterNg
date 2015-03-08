@@ -19,6 +19,8 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
           .find('.loading').remove().end()
           .find('.content').removeClass('hide')
         $scope.newTweets.push.apply($scope.newTweets, data)
+        console.log data
+      Twitter.getUserTimeline().then (data) ->
         console.log(data)
 
   $scope.login = ->
@@ -30,6 +32,10 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
   $scope.retweet = (tweet) ->
     Twitter.retweet(tweet).then ->
       tweet.retweeted = true
+
+  $scope.favorite = (tweet) ->
+    Twitter.favorite(tweet).then ->
+      tweet.favorited = !tweet.favorited
 
 
   $scope.prefixLink = (suffix) ->

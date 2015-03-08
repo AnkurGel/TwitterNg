@@ -20,6 +20,6 @@
                 %i.glyphicon.glyphicon-retweet{ "ng-class" => "{retweeted: tweet.retweeted}" }
                 {{ tweet.retweeted ? "Retweeted" : "Retweet" }}
             .col-md-4
-              %span{ href: '#', "ng-click" => 'favorite(tweet)' }
+              %span{ "ng-click" => 'favorite(tweet)' }
                 %i.glyphicon.glyphicon-star{ "ng-class" => "{favorited: tweet.favorited}" }
                 {{ tweet.favorited ? "Favorited" : "Favorite" }}

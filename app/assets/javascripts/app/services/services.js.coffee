@@ -40,6 +40,14 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
         .fail -> alert("Something went wrong while attempting to retweet this")
       deferred.promise
 
+    favorite: (tweet) ->
+      deferred = $q.defer()
+      url = if tweet.favorited then "1.1/favorites/destroy.json" else "/1.1/favorites/create.json"
+      twitterObject.post(url, data: {id: tweet.id_str} )
+        .done (data)-> deferred.resolve data
+        .fail -> alert("Something went wrong while favoriting this tweet")
+      deferred.promise
+
     getUserTimeline: (userId) ->
       Defer(twitterObject, '/1.1/statuses/user_timeline.json', {userId: userId})
 
