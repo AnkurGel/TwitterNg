@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ./lib/angular-linkify.min
 //= require angular
+//= require ./lib/angular-linkify.min
 //= require angular-animate
 //= require angular-route
 //= require bootstrap-sprockets
