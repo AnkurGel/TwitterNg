@@ -4,7 +4,7 @@ TwitterNg
 This application is being powered by Rails and Angular JS to provide simplistic and seamless interaction with Twitter timeline.
 
 ![Landing page](http://cl.ly/image/1l173v221i2b/Screen%20Shot%202015-01-18%20at%202.10.41%20am.png)
-![Feed](http://f.cl.ly/items/2K31430R0E071F0y3b20/Screen%20Shot%202015-01-18%20at%202.11.14%20am.png)
+![Feed](http://f.cl.ly/items/011y3x2B0h0V011d3e3J/Image%202015-03-23%20at%2012.23.46%20am.png)
 
 Tasks
 -----
