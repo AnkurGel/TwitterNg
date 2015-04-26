@@ -1,6 +1,8 @@
 %div.row.userInfo{ 'ng-show' => 'isConnected' }
-  .loading
-    = image_tag 'ajax-loader.gif'
+  .loading.spinner
+    .bounce1
+    .bounce2
+    .bounce3
   .content.hide
     .col-xs-6.col-md-2.profile_pic
       %span.thumbnail.profile_pic
@@ -28,5 +30,6 @@
           %span.glyphicon.glyphicon-link
           %a{ "ng-href" => "{{prefixLink('')}}" } {{prefixLink('')}}
         .col-xs-3.col-md-3
-          %span.btn.btn-success{ type: 'button', "ng-click" => "refresh()" }
+          %span.btn.btn-success.refresh-timeline{ type: 'button', "ng-click" => "refresh()" }
+            %span.glyphicon.glyphicon-refresh
             Refresh

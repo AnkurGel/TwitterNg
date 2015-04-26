@@ -17,16 +17,17 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
       prepareTimeline()
 
   prepareTimeline = (params) ->
+    $(".row.tweets .loading").show()
+    $(".refresh-timeline").addClass 'disabled'
     Twitter.getTimeline(params).then (data) ->
-      console.log("Got")
-      console.log data
       $(".row.tweets")
-      .find('.loading').remove().end()
+      .find('.loading').hide().end()
       .find('.content').removeClass('hide')
+      $(".refresh-timeline").removeClass 'disabled'
       present_tweets_id = $scope.newTweets.map (t) -> t.id
       data = data.filter (t, i) -> $.inArray(t.id, present_tweets_id) < 0
       $scope.newTweets.push.apply(data, $scope.newTweets)
-      $scope.newTweets = data;
+      $scope.newTweets = data
       console.log data
     Twitter.getUserTimeline().then (data) ->
       #console.log(data)
