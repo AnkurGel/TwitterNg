@@ -14,17 +14,22 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
         $(".userInfo .loading").remove()
         $(".content").removeClass 'hide'
 
-      Twitter.getTimeline().then (data) ->
-        $(".row.tweets")
-          .find('.loading').remove().end()
-          .find('.content').removeClass('hide')
-        present_tweets_id = $scope.newTweets.map (t) -> t.id
-        data = data.filter (t, i) -> $.inArray(t.id, present_tweets_id) < 0
-        $scope.newTweets.push.apply(data, $scope.newTweets)
-        $scope.newTweets = data;
-        console.log data
-      Twitter.getUserTimeline().then (data) ->
-        console.log(data)
+      prepareTimeline()
+
+  prepareTimeline = (params) ->
+    Twitter.getTimeline(params).then (data) ->
+      console.log("Got")
+      console.log data
+      $(".row.tweets")
+      .find('.loading').remove().end()
+      .find('.content').removeClass('hide')
+      present_tweets_id = $scope.newTweets.map (t) -> t.id
+      data = data.filter (t, i) -> $.inArray(t.id, present_tweets_id) < 0
+      $scope.newTweets.push.apply(data, $scope.newTweets)
+      $scope.newTweets = data;
+      console.log data
+    Twitter.getUserTimeline().then (data) ->
+      #console.log(data)
 
   $scope.login = ->
     Twitter.connect().then ->
@@ -40,7 +45,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
     Twitter.favorite(tweet).then ->
       tweet.favorited = !tweet.favorited
 
-  $scope.refresh = -> postSignIn()
+  $scope.refresh = -> prepareTimeline({ since_id: $scope.newTweets[0].id } if $scope.newTweets.length > 0)
 
   $scope.prefixLink = (suffix) ->
     ("http://twitter.com/" + $scope.userInfo.screen_name + "/" + suffix) if suffix? && $scope.userInfo?

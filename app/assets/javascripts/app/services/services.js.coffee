@@ -31,7 +31,7 @@ FeedServices.factory 'Twitter', ['$q', 'Auth', 'Defer', ($q, Auth, Defer) ->
 
     getUserInfo: -> Defer(twitterObject, '/1.1/account/verify_credentials.json')
 
-    getTimeline: -> Defer(twitterObject, '/1.1/statuses/home_timeline.json')
+    getTimeline: (params = {}) -> Defer(twitterObject, '/1.1/statuses/home_timeline.json', $.extend params, { count: 80 })
 
     retweet: (tweet) ->
       deferred = $q.defer()

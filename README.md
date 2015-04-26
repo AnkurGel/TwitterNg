@@ -17,6 +17,8 @@ Tasks
 - [x] Directive for representing tweet and components
 - [ ] Make service for auto-refreshing and manual refresh of user's timeline
 - [x] Integrate different twitter functionalities in application
+- [ ] Reply support
+- [ ] Keyboard navigation
 - [ ] _More..._
 
 Currently #WIP
