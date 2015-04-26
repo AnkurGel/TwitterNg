@@ -114,6 +114,16 @@ body {
   .content .row.tweet {
     min-height: 130px;
     text-decoration: none;
+    &.favorited {
+      background-color: rgb(240, 240, 179);
+    }
+    &.retweeted {
+      background-color: rgb(220, 245, 245);
+    }
+    &.retweeted.favorited {
+      background-color: rgb(255, 226, 203);
+      border: 1px dashed #000;
+    }
     &:hover {
       background-color: rgb(251, 251, 251);
     }

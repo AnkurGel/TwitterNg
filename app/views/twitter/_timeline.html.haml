@@ -5,7 +5,7 @@
     .bounce3
   .content.hide
     .col-lg-6.col-md-6{ "ng-repeat" => "tweet in newTweets" }
-      .row.tweet
+      .row.tweet{ "ng-class" => "{favorited: tweet.favorited, retweeted: tweet.retweeted}" }
         .row
           .col-md-4
             %h4{ linkify: 'twitter' } @{{ tweet.user.screen_name }}
