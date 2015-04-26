@@ -24,6 +24,9 @@
           %a.btn.btn-primary{ type: 'button', "ng-href" => "{{prefixLink('following')}}" }
             Following
             %span.badge {{ userInfo.friends_count }}
-        .col-xs-6.col-md-6
+        .col-xs-3.col-md-3
           %span.glyphicon.glyphicon-link
           %a{ "ng-href" => "{{prefixLink('')}}" } {{prefixLink('')}}
+        .col-xs-3.col-md-3
+          %span.btn.btn-success{ type: 'button', "ng-click" => "refresh()" }
+            Refresh

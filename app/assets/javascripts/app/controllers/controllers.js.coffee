@@ -18,7 +18,10 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
         $(".row.tweets")
           .find('.loading').remove().end()
           .find('.content').removeClass('hide')
-        $scope.newTweets.push.apply($scope.newTweets, data)
+        present_tweets_id = $scope.newTweets.map (t) -> t.id
+        data = data.filter (t, i) -> $.inArray(t.id, present_tweets_id) < 0
+        $scope.newTweets.push.apply(data, $scope.newTweets)
+        $scope.newTweets = data;
         console.log data
       Twitter.getUserTimeline().then (data) ->
         console.log(data)
@@ -37,6 +40,7 @@ FeedControllers.controller 'TwitterFeed', ['$scope', 'Auth', 'Twitter', ($scope,
     Twitter.favorite(tweet).then ->
       tweet.favorited = !tweet.favorited
 
+  $scope.refresh = -> postSignIn()
 
   $scope.prefixLink = (suffix) ->
     ("http://twitter.com/" + $scope.userInfo.screen_name + "/" + suffix) if suffix? && $scope.userInfo?
